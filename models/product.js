@@ -1,5 +1,6 @@
 import Sequelize from "sequelize";
 import database from './database.js';
+import Category from "./category.js";
 
 const Product=database.define('product',{
     id:{
@@ -10,9 +11,11 @@ const Product=database.define('product',{
     },
     productName: Sequelize.STRING,
     productMainImage:Sequelize.STRING,
+    productPrice:Sequelize.INTEGER,
     productDescription:Sequelize.TEXT,
     isAvailable:Sequelize.BOOLEAN,
-    unitInStock:Sequelize.INTEGER
+    unitInStock:Sequelize.INTEGER,
+    categoryId:Sequelize.INTEGER
 })
 
 export default Product;
