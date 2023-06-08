@@ -41,6 +41,26 @@ router.post('/delete_product/:cid/:id',async(req,res)=>{
             res.redirect('/products/'+id);
         })
     })
+    router.post('/edit_product/:id',async(req,res)=>{
+        const {productName,productMainImage,productPrice,productDescription,isAvailable,unitInStock,categoryId}=req.body;
+        const id=req.params.id;
+        await Product.update({
+            productName:productName,
+            productMainImage:productMainImage,
+            productPrice:productPrice,
+            productDescription:productDescription,
+            isAvailable:isAvailable,
+            unitInStock:unitInStock,
+            categoryId:categoryId}
+            ,{where:{id:id}})
+        .then(result=>{
+            res.redirect('/products/'+categoryId);
+        })
+        .catch(error=>{
+            console.log(error);
+            res.redirect('/products/'+categoryId);
+        })
+    })
     router.post('/add_category',async(req,res)=>{
         const {categoryName,categoryMainImage}=req.body;
         Category.create({

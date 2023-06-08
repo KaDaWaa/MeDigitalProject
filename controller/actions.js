@@ -48,6 +48,24 @@ const router=express.Router();
       })
 
   })
+  router.get('/edit_product/:id',async(req,res)=>{
+    const id=req.params.id;
+
+    Product.findByPk(id)
+    .then(product=>{
+      Category.findAll()
+      .then(categories=>{
+        res.render('editproduct',{
+          pageTitle:'Edit '+ product.productName,
+          product:product,
+          categories:categories
+        })
+      })        
+    })
+      .catch(error=>{
+        res.redirect('/product/'+product.categoryId)
+    })
+  })
 
 
 
